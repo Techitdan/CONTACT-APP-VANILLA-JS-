@@ -49,10 +49,12 @@
             />
           </div>
           <!-- ADD CONTACT BUTTON -->
+          <div class="add-contact-button">
           <button class="add-contact">
             <img src="images/add-icon.png" alt="" />
-            <p>ADD CONTACTS</p>
+            <p>ADD CONTACT</p>
           </button>
+        </div>
           <!-- DELETE CONTACT BUTTON -->
           <button class="add-contact del-contact">
             <img src="/images/delete-icon.png" alt="" />
@@ -68,8 +70,29 @@
             <th>Email address</th>
             <th>phonebook</th>
           </tr>
-         
         </table>
+        <!-- SECOND MODAL -->
+        <div class="modal2">
+          <!-- profile -->
+          <div class="class=fullname modal-input">
+            <p>Full Name: <input type="text" id="fullname" /></p>
+          </div>
+          <div class="email modal-input">
+            <p>Email: <input type="email" name="" id="email" /></p>
+          </div>
+          <div class="phone modal-input">
+            <p>
+              Phone Number:
+              <input type="number" name="" id="no." />
+            </p>
+          </div>
+          <!-- profile-button -->
+          <div class="profile-button">
+            <button class="add edit-contact">Edit Contact</button>
+            <button class="add cancel-contact">Cancel</button>
+          </div>
+        </div>
+
       </div>
       
         <!-- Modal -->
@@ -145,38 +168,8 @@
       </div>
     </div>
     <!-- second modal -->
-    <div class="modal2">
-      <!-- profile -->
-      <div class="class=fullname modal-input">
-        <p>Full Name: <input type="text" id="fullname" /></p>
-      </div>
-      <div class="email modal-input">
-        <p>Email: <input type="email" name="" id="email" /></p>
-      </div>
-      <div class="phone modal-input">
-        <p>
-          Phone Number:
-          <input type="number" name="" id="no." />
-        </p>
-      </div>
-      <!-- profile-button -->
-      <div class="profile-button">
-        <button class="add edit-contact">Edit Contact</button>
-        <button class="add cancel-contact">Cancel</button>
-      </div>
-    </div>
+
   </div>
   <script src="script.js"></script>
 </body>
 </html>
-<!-- 
-
- -->
-<!--  addElement.addEventListener("mouseenter", function () {
-  addElement.textContent = "SAVE";
-});
-
-addElement.addEventListener("mouseleave", function () {
-  addElement.textContent = "ADD CONTACT";
-});
- -->

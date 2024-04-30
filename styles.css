@@ -116,35 +116,29 @@ nav img {
   padding: 20px;
   font-weight: 25;
 }
-
 .add-contact {
   display: flex;
-  gap: 10px;
-  height: 100%;
   align-items: center;
-  /* margin: 2rem; */
-  padding: 2.4rem;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 40px;
   border-radius: 20px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  font: 700;
   background-color: #0657ad;
-  text-align: center;
   color: #eeecec;
+  width: 250px;
+}
+
+.add-contact img {
+  width: auto;
+  height: 30px;
 }
 
 .del-contact {
   visibility: hidden;
 }
 
-/* .add-contact h3{
-display: inline-block;
-font-weight: 700;
-}
- */
-.add-contact img {
-  height: 45px;
-}
 .table1 {
   margin-top: 6rem;
   width: 50%;
@@ -269,34 +263,57 @@ td {
   /* background-color: rgba(0, 0, 0, 0.4); */
 }
 .modal2 {
-  width: 44%;
-  height: 35%;
+  width: 40%;
   background-color: #eeecec;
-  margin: 200px;
+  margin: 40px;
   padding: 10px;
   font-size: 24px;
   font-weight: 20;
   visibility: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal2 input {
-  width: 60%;
-  height: 50px;
   border: none;
   text-align: center;
   background-color: #eeecec;
   font-size: 24px;
+  justify-content: center;
+  text-align: center;
 }
 
 .modal-input {
   border-bottom: ridge 3px;
+  height: 40px;
 }
-
+.edit-contact {
+  color: #69c33b;
+  font-size: 16px;
+}
+.cancel-contact {
+  background-color: #808080;
+  color: whitesmoke;
+}
 .cancel-contact:hover {
   background-color: #ff0000;
+  color: black;
+  font-size: 16px;
+}
+
+.edit-contact:hover {
+  background-color: #69c33b;
+  color: #f6f9f5;
+  font-size: 16px;
 }
 
 .profile-button {
   font-size: 24px;
   padding-left: 400px;
+  display: flex;
+}
+
+.contactRow {
+  display: flex;
+  width: 100%;
 }
