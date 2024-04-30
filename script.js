@@ -7,7 +7,6 @@ const deleteContact = document.querySelector(".del-contact");
 const table = document.querySelector(".table1");
 
 const secondModal = document.querySelector(".form-two");
-const clearModal = document.querySelector(".cancel-icon");
 const modalInput = document.querySelector(".modal-input");
 const fullName = document.querySelector(".fullname");
 const email = document.querySelector(".email");
@@ -22,22 +21,25 @@ const addElement = document.querySelector(".add-con");
 const editContact = document.querySelector(".edit-contact");
 const cancelContact = document.querySelector(".cancel-contact");
 const form = document.querySelector("form");
-// const contacts = [];
+let currentRow;
 
-// const newContact = (fullName, email, phone) => {};
+const init = function () {
+  emailaddress.value = " ";
+  phoneNo.value = " ";
+  firstname.value = " ";
+  lastName.value = " ";
+};
 
-// const createNewContact = () => {
-//   const contactRow = document.createElement("div");
-//   const contactTable = document.createElement("Table");
-//   const contactTable = document.createElement("tr");
-//   const contactTable = document.createElement("td");
-//   const contactTable = document.createElement("td");
-//   const contactTable = document.createElement("td");
-// };
+window.addEventListener("load", function () {
+  init();
+});
 
 addContact.addEventListener("click", function () {
   modal.style.visibility = "visible";
-  console.log(form);
+  modal2.style.visibility = "hidden";
+  init();
+
+  localStorage.setItem("table", JSON.stringify(table));
 });
 
 cancelIcon.addEventListener("click", function () {
@@ -46,7 +48,6 @@ cancelIcon.addEventListener("click", function () {
 
 cancelElement.addEventListener("click", function () {
   modal.style.visibility = "hidden";
-  console.log("e");
 });
 
 addElement.addEventListener("mouseenter", function () {
@@ -59,14 +60,12 @@ addElement.addEventListener("mouseleave", function () {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  console.log("ok");
-  let num = 1;
   table.insertAdjacentHTML(
     "beforeEnd",
     `<tr class="table-row" >
            <td>
-           <input type="checkbox" class="myCheckbox myCheckbox${++num}">
-           <td>${firstname.value}&nbsp;&nbsp;&nbsp;${lastName.value}</td>
+           <input type="checkbox" class="myCheckbox">
+           <td>${firstname.value} ${lastName.value}</td>
            <td>${emailaddress.value}</td>
            <td>${phoneNo.value}</td>
            <td>
@@ -74,6 +73,7 @@ form.addEventListener("submit", function (e) {
            </td>
          </tr>`
   );
+
   modal.style.visibility = "hidden";
 });
 
@@ -85,7 +85,7 @@ function deleteRow(event) {
     // Get the parent table row of the clicked icon
 
     const row = event.target.closest("tr");
-    const checkbox = document.querySelector(".myCheckbox");
+    const checkbox = row.querySelector(".myCheckbox");
     console.log(checkbox);
 
     // Check if a row was found
@@ -94,8 +94,6 @@ function deleteRow(event) {
         // Remove the row from the DOM
         row.remove();
       }
-      /*       checkbox.addEventListener("input", function () {});
-       */
     }
   }
 }
@@ -108,15 +106,7 @@ document.addEventListener("click", function (event) {
     deleteRow(event);
   }
 });
-/* 
-function checkAllCheckboxes() {
-  const checkAll = document.querySelector(".checkAll");
-  const checkboxes = document.querySelectorAll("input [type ='checkbox']");
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = true;
-  });
-}
- */
+
 const checkAll = document.querySelector(".checkAll");
 checkAll.addEventListener("click", function () {
   const checkboxes = document.querySelectorAll(".myCheckbox");
@@ -124,9 +114,6 @@ checkAll.addEventListener("click", function () {
     checkboxes.forEach(function (checkbox) {
       checkbox.checked = true;
     });
-
-    console.log(checkboxes);
-    console.log(table.children.length);
 
     deleteContact.style.visibility = "visible";
   } else {
@@ -136,27 +123,9 @@ checkAll.addEventListener("click", function () {
     deleteContact.style.visibility = "hidden";
   }
 });
-//Event listener to delete all rows
-/* 
-deleteContact.addEventListener("click", function () {
-  // Get all the checkboxes
-  const checkboxes = document.querySelectorAll(".myCheckbox");
 
-  // Iterate over each checkbox
-  checkboxes.forEach(function (checkbox) {
-    // Check if the checkbox is checked
-    if (checkbox.checked) {
-      // Get the parent row of the checked checkbox
-      const row = checkbox.closest("tr");
-      
-      // Check if a row was found
-      if (row) {
-        // Remove the row from the DOM
-        row.remove();
-      }
-    }
-  })
- */
+//Event listener to delete all rows
+
 deleteContact.addEventListener("click", function () {
   //to get all checkboxes
   const checkboxes = document.querySelectorAll(".myCheckbox");
@@ -168,11 +137,69 @@ deleteContact.addEventListener("click", function () {
         row.remove();
       }
       deleteContact.style.visibility = "hidden";
+      checkAll.checked = false;
     }
   });
 });
 
-const row = checkbox.closest("tr");
-row.addEventListener("click", function () {
-  modal2.style.visibility = "visible";
+// Define the populateModalWithRowData function outside of the event listener block
+function fillModalWithRowData(clickedRow) {
+  // Get the full name, email, and phone number from the clicked row
+  const fullName = clickedRow
+    .querySelector("td:nth-child(2)")
+    .textContent.trim();
+  const email = clickedRow.querySelector("td:nth-child(3)").textContent.trim();
+  const phoneNumber = clickedRow
+    .querySelector("td:nth-child(4)")
+    .textContent.trim();
+
+  // Set the values of modal2 inputs with the extracted data
+  document.getElementById("fullname").value = fullName;
+  document.getElementById("email").value = email;
+  document.getElementById("no.").value = phoneNumber;
+}
+
+// Add event listener to handle clicks on the table rows
+document.addEventListener("click", function (event) {
+  // Check if the click event occurred inside the table
+  if (event.target.closest(".table1 .table-row")) {
+    // Get the clicked row
+    currentRow = event.target.closest(".table-row");
+    console.log(currentRow);
+
+    // Check if the clicked element is not the checkbox or delete icon
+    if (
+      !event.target.classList.contains("myCheckbox") &&
+      !event.target.classList.contains("img-del")
+    ) {
+      // Call the function to populate modal2 with row data
+      fillModalWithRowData(currentRow);
+
+      // Make second modal visible
+      modal2.style.visibility = "visible";
+    }
+  }
+});
+
+//Event listener to remove and edit second modal
+cancelContact.addEventListener("click", function () {
+  modal2.style.visibility = "hidden";
+});
+
+editContact.addEventListener("click", function (event) {
+  modal.style.visibility = "visible";
+  modal2.style.visibility = "hidden";
+  //getting my clicked row value
+  emailaddress.value = document.getElementById("email").value;
+  phoneNo.value = document.getElementById("no.").value;
+  //getting my clicked row value of fullName
+  const fullName = document.getElementById("fullname").value;
+  const fullNameParts = fullName.split(" ");
+  firstname.value = fullNameParts[0];
+  lastName.value = fullNameParts.slice(1).join(" ");
+
+  //geting clicked row
+});
+addElement.addEventListener("click", function () {
+  currentRow.remove();
 });
