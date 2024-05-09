@@ -1,11 +1,11 @@
 const addContact = document.querySelector(".add-contact");
-const contactName = document.getElementById("search");
+
 const modal = document.querySelector(".container2");
 const modal2 = document.querySelector(".modal2");
 const cancelIcon = document.querySelector(".cancel-icon");
 const deleteContact = document.querySelector(".del-contact");
 const table = document.querySelector(".table1");
-
+const searchbox = document.querySelector("#search");
 const secondModal = document.querySelector(".form-two");
 const modalInput = document.querySelector(".modal-input");
 const fullName = document.querySelector(".fullname");
@@ -22,6 +22,7 @@ const editContact = document.querySelector(".edit-contact");
 const cancelContact = document.querySelector(".cancel-contact");
 const form = document.querySelector("form");
 let currentRow;
+const contactArr = JSON.parse(localStorage.getItem("contactArr")) || [];
 
 const init = function () {
   emailaddress.value = " ";
@@ -30,16 +31,52 @@ const init = function () {
   lastName.value = " ";
 };
 
+searchbox.addEventListener("keyup", function (e) {
+  const tableRows = document.querySelectorAll(".table-row");
+  // saving it into a new variable
+  const searchTerm = e.target.value.toLowerCase(); //to get the search bar value in lowercase
+  tableRows.forEach((tablerow) => {
+    const nameCol = tablerow.querySelectorAll("td")[1];
+    const emailCol = tablerow.querySelectorAll("td")[2];
+    const phoneNumCol = tablerow.querySelectorAll("td")[3];
+    const container_tableBody = nameCol.parentElement;
+    let nameText = nameCol.textContent.toLowerCase();
+    let emailText = emailCol.textContent.toLowerCase();
+    let phoneNumText = phoneNumCol.textContent;
+    if (
+      nameText.indexOf(searchTerm) > -1 ||
+      emailText.indexOf(searchTerm) > -1 ||
+      phoneNumText.indexOf(searchTerm) > -1
+    ) {
+      container_tableBody.style.display = "";
+    } else {
+      container_tableBody.style.display = "none";
+    }
+  });
+});
 window.addEventListener("load", function () {
   init();
+  contactArr.forEach((contact) => {
+    table.insertAdjacentHTML(
+      "beforeEnd",
+      `<tr class="table-row" >
+            <td>
+            <input type="checkbox" class="myCheckbox">
+            <td>${contact.firstname} ${contact.lastName}</td>
+            <td>${contact.emailaddress}</td>
+            <td>${contact.phoneNo}</td>
+            <td>
+              <img src="/images/delete-icon.png"  class="img-del" alt="" />
+            </td>
+          </tr>`
+    );
+  });
 });
 
 addContact.addEventListener("click", function () {
   modal.style.visibility = "visible";
   modal2.style.visibility = "hidden";
   init();
-
-  localStorage.setItem("table", JSON.stringify(table));
 });
 
 cancelIcon.addEventListener("click", function () {
@@ -60,20 +97,30 @@ addElement.addEventListener("mouseleave", function () {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+  const contactObj = {
+    firstname: firstname.value,
+    lastName: lastName.value,
+    emailaddress: emailaddress.value,
+    phoneNo: phoneNo.value,
+  };
+
+  contactArr.push(contactObj);
+  const currentContact = contactArr[contactArr.length - 1];
   table.insertAdjacentHTML(
     "beforeEnd",
     `<tr class="table-row" >
            <td>
            <input type="checkbox" class="myCheckbox">
-           <td>${firstname.value} ${lastName.value}</td>
-           <td>${emailaddress.value}</td>
-           <td>${phoneNo.value}</td>
+           <td>${currentContact.firstname} ${currentContact.lastName}</td>
+           <td>${currentContact.emailaddress}</td>
+           <td>${currentContact.phoneNo}</td>
            <td>
              <img src="/images/delete-icon.png"  class="img-del" alt="" />
            </td>
          </tr>`
   );
 
+  localStorage.setItem("contactArr", JSON.stringify(contactArr));
   modal.style.visibility = "hidden";
 });
 
@@ -189,6 +236,7 @@ cancelContact.addEventListener("click", function () {
 editContact.addEventListener("click", function (event) {
   modal.style.visibility = "visible";
   modal2.style.visibility = "hidden";
+  console.log(contactArr[0]);
   //getting my clicked row value
   emailaddress.value = document.getElementById("email").value;
   phoneNo.value = document.getElementById("no.").value;
@@ -203,3 +251,8 @@ editContact.addEventListener("click", function (event) {
 addElement.addEventListener("click", function () {
   currentRow.remove();
 });
+
+const contactName = () => {
+  const searchbox = document.querySelector("#search").value.toUpperCase();
+  console.log(input);
+};
