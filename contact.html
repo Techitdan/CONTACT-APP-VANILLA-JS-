@@ -9,167 +9,165 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   </head>
-</html>
-<body>
-  <div class="biggest-bird">
-    <div class="container">
-      <!-- side navbar -->
-      <nav class="box-one">
-        <!-- logo -->
-        <div class="menu">
-          <img src="images/menu-icon.png" alt="" />
-        </div>
-        <div class="icons">
-          <img src="images/blue_re-pict-house-base.png_32.png" alt="" />
-          <img src="images/contact-icon.png" alt="" />
-          <img src="images/message-icon.png" alt="" />
-          <img src="images/settings-icon.jpeg" alt="" />
-        </div>
-      </nav>
-      <!-- main content -->
-      <div class="main-content">
-        <!-- box-two: contact title and image -->
-        <div class="box-two">
-          <div class="contact-title">
-            <img src="/images/phonebooknew.png" alt="" class="phonebook-img" />
-            <div class="image-text">
-              <h2>CONTACTS</h2>
-              <h3>Welcome to My Phonebook</h3>
-            </div>
+  <body>
+    <div class="biggest-bird">
+      <div class="container">
+        <!-- side navbar -->
+        <nav class="box-one">
+          <!-- logo -->
+          <div class="menu">
+            <img src="images/menu-icon.png" alt="" />
           </div>
-        </div>
-
-        <div class="form">
-          <div class="input">
-            <input
-              type="text"
-              id="search"
-              placeholder="Search by contact name"
-            />
+          <div class="icons">
+            <img src="images/blue_re-pict-house-base.png_32.png" alt="" />
+            <img src="images/contact-icon.png" alt="" />
+            <img src="images/message-icon.png" alt="" />
+            <img src="images/settings-icon.jpeg" alt="" />
           </div>
-          <!-- ADD CONTACT BUTTON -->
-          <div class="add-contact-button">
-          <button class="add-contact">
-            <img src="images/add-icon.png" alt="" />
-            <p>ADD CONTACT</p>
-          </button>
-        </div>
-          <!-- DELETE CONTACT BUTTON -->
-          <button class="add-contact del-contact">
-            <img src="/images/delete-icon.png" alt="" />
-            <p>DELETE ALL</p>
-          </button>
-        </div>
-
-        <div class="contactRow" >
-        <table class="table1">
-          <tr>
-            <th><input type="checkbox" class="checkall"></th>
-            <th>Fullname</th>
-            <th>Email address</th>
-            <th>phonebook</th>
-          </tr>
-        </table>
-        <!-- SECOND MODAL -->
-        <div class="modal2">
-          <!-- profile -->
-          <div class="class=fullname modal-input">
-            <p>Full Name: <input type="text" id="fullname" /></p>
-          </div>
-          <div class="email modal-input">
-            <p>Email: <input type="email" name="" id="email" /></p>
-          </div>
-          <div class="phone modal-input">
-            <p>
-              Phone Number:
-              <input type="number" name="" id="no." />
-            </p>
-          </div>
-          <!-- profile-button -->
-          <div class="profile-button">
-            <button class="add edit-contact">Edit Contact</button>
-            <button class="add cancel-contact">Cancel</button>
-          </div>
-        </div>
-
-      </div>
-      
-        <!-- Modal -->
-        <!-- <div class="modal">
-    </div> -->
-    <form>
-        <div class="container2">
-          <div class="form-two">
-            <h2>Add Contact</h2>
-
-            <div class="form-div">
-              <div class="mail">
-                <div class="first-name">
-                  <p>First name</p>
-                 
-                  <input
-                    type="text"
-                    id="search"
-                    class="first firstname-input"
-                    placeholder="Enter Your First name"
-                    required
-                  />
-                
-                </div>
-                <div class="email-address">
-                  <p>Email Address</p>
-                  <input
-                    type="text"
-                    id="search"
-                    class="your-mail email-input"
-                    placeholder="Input Your Email Address"
-                    required
-                  />
-                </div>
-              </div>
-
-              <!-- last-no -->
-              <div class="last-no">
-                <!-- lastname -->
-                <div class="last-name">
-                  <p>Last name</p>
-                  <input
-                    type="text"
-                    id="search"
-                    
-                    class="yourLastName lastname-input"
-
-                    placeholder="Enter Your Last name"
-                    required
-                  />
-                </div>
-                <!-- phone-no -->
-                <div class="phone-no">
-                  <p>Phone number</p>
-                  <input type="number" id="search" class="your-num number-input"
-                   placeholder="input phone number"  required />
-                </div>
+        </nav>
+        <!-- main content -->
+        <div class="main-content">
+          <!-- box-two: contact title and image -->
+          <div class="box-two">
+            <div class="contact-title">
+              <img
+                src="/images/phonebooknew.png"
+                alt=""
+                class="phonebook-img"
+              />
+              <div class="image-text">
+                <h2>CONTACTS</h2>
+                <h3>Welcome to My Phonebook</h3>
               </div>
             </div>
-            <!-- submit button -->
-            <div class="button">
-              <button type="button" class="add cancel" >CANCEL</button>
-              <button type="submit" class="add add-con">ADD CONTACT</button>
+          </div>
+
+          <div class="form">
+            <div class="input">
+              <input
+                type="text"
+                id="search"
+                placeholder="Search by contact name"
+              />
+            </div>
+            <!-- ADD CONTACT BUTTON -->
+            <div class="add-contact-button">
+              <button class="add-contact">
+                <img src="images/add-icon.png" alt="" />
+                <p>ADD CONTACT</p>
+              </button>
+            </div>
+            <!-- DELETE CONTACT BUTTON -->
+            <button class="add-contact del-contact">
+              <img src="/images/delete-icon.png" alt="" />
+              <p>DELETE ALL</p>
+            </button>
+          </div>
+
+          <div class="contactRow">
+            <table class="table1">
+              <tr>
+                <th><input type="checkbox" class="checkall" /></th>
+                <th>Fullname</th>
+                <th>Email address</th>
+                <th>phonebook</th>
+              </tr>
+            </table>
+            <!-- SECOND MODAL -->
+            <div class="modal2">
+              <!-- profile -->
+              <div class="class=fullname modal-input">
+                <p>Full Name: <input type="text" id="fullname" /></p>
+              </div>
+              <div class="email modal-input">
+                <p>Email: <input type="email" name="" id="email" /></p>
+              </div>
+              <div class="phone modal-input">
+                <p>
+                  Phone Number:
+                  <input type="text" name="" id="no." />
+                </p>
+              </div>
+              <!-- profile-button -->
+              <div class="profile-button">
+                <button class="add edit-contact">Edit Contact</button>
+                <button class="add cancel-contact">Cancel</button>
+              </div>
             </div>
           </div>
-          <!-- cancel-icon section -->
-          <div class="cancel-icon">
-            <img src="/images/cancel-icon.png" alt="" />
-          </div>
         </div>
-      </form>
+        <div class="form-modal">
+          <form>
+            <div class="form-two">
+              <h2>Add Contact</h2>
 
+              <div class="form-div">
+                <div class="mail">
+                  <div class="first-name">
+                    <p>First name</p>
+
+                    <input
+                      type="text"
+                      class="first firstname-input"
+                      placeholder="Enter Your First name"
+                      required
+                    />
+                  </div>
+                  <div class="email-address">
+                    <p>Email Address</p>
+                    <input
+                      type="text"
+                      class="your-mail email-input"
+                      placeholder="Input Your Email Address"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- last-no -->
+                <div class="last-no">
+                  <!-- lastname -->
+                  <div class="last-name">
+                    <p>Last name</p>
+                    <input
+                      type="text"
+                      class="yourLastName lastname-input"
+                      placeholder="Enter Your Last name"
+                      required
+                    />
+                  </div>
+                  <!-- phone-no -->
+                  <div class="phone-no">
+                    <p>Phone number</p>
+                    <input
+                      type="number"
+                      class="your-num number-input"
+                      placeholder="input phone number"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- submit button -->
+              <div class="button">
+                <button type="button" class="add cancel">CANCEL</button>
+                <button type="submit" class="add add-con">ADD CONTACT</button>
+              </div>
+              <!-- cancel-icon section -->
+              <div class="cancel-icon">
+                <img src="/images/cancel-icon.png" alt="" />
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    <!-- second modal -->
-
-  </div>
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

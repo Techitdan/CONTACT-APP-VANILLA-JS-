@@ -1,8 +1,7 @@
 const addContact = document.querySelector(".add-contact");
 
-const modal = document.querySelector(".form-two");
+const modal = document.querySelector(".container2");
 const modal2 = document.querySelector(".modal2");
-const formModal = document.querySelector(".form-modal");
 const cancelIcon = document.querySelector(".cancel-icon");
 const deleteContact = document.querySelector(".del-contact");
 const table = document.querySelector(".table1");
@@ -27,17 +26,10 @@ const contactArr = JSON.parse(localStorage.getItem("contactArr")) || [];
 
 const init = function () {
   emailaddress.value = " ";
-  phoneNo.value = countrycode.getNumber();
+  phoneNo.value = " ";
   firstname.value = " ";
   lastName.value = " ";
 };
-
-// intel
-const countrycode = window.intlTelInput(phoneNo, {
-  separateDialCode: true,
-  utilsScript:
-    "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-});
 
 searchbox.addEventListener("keyup", function (e) {
   const tableRows = document.querySelectorAll(".table-row");
@@ -64,7 +56,6 @@ searchbox.addEventListener("keyup", function (e) {
 });
 window.addEventListener("load", function () {
   init();
-  formModal.style.display = "none";
   contactArr.forEach((contact) => {
     table.insertAdjacentHTML(
       "beforeEnd",
@@ -85,18 +76,15 @@ window.addEventListener("load", function () {
 addContact.addEventListener("click", function () {
   modal.style.visibility = "visible";
   modal2.style.visibility = "hidden";
-  formModal.style.display = "block";
   init();
 });
 
 cancelIcon.addEventListener("click", function () {
   modal.style.visibility = "hidden";
-  formModal.style.display = "none";
 });
 
 cancelElement.addEventListener("click", function () {
   modal.style.visibility = "hidden";
-  formModal.style.display = "none";
 });
 
 addElement.addEventListener("mouseenter", function () {
@@ -109,41 +97,31 @@ addElement.addEventListener("mouseleave", function () {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  if (
-    firstname.value.trim() !== "" &&
-    lastName.value.trim() !== "" &&
-    emailaddress.value.trim() !== ""
-  ) {
-    const contactObj = {
-      firstname: firstname.value,
-      lastName: lastName.value,
-      emailaddress: emailaddress.value,
-      phoneNo: countrycode.getNumber(),
-    };
-    // e.preventDefault();
-    contactArr.push(contactObj);
-    const currentContact = contactArr[contactArr.length - 1];
-    table.insertAdjacentHTML(
-      "beforeEnd",
-      `<tr class="table-row" >
-             <td>
-             <input type="checkbox" class="myCheckbox">
-             <td>${currentContact.firstname} ${currentContact.lastName}</td>
-             <td>${currentContact.emailaddress}</td>
-             <td>${currentContact.phoneNo}</td>
-             <td>
-               <img src="/images/delete-icon.png"  class="img-del" alt="" />
-             </td>
-           </tr>`
-    );
+  const contactObj = {
+    firstname: firstname.value,
+    lastName: lastName.value,
+    emailaddress: emailaddress.value,
+    phoneNo: phoneNo.value,
+  };
 
-    localStorage.setItem("contactArr", JSON.stringify(contactArr));
-    modal.style.visibility = "hidden";
-    formModal.style.display = "none";
-  } else {
-    console.log("year 2024....");
-    return;
-  }
+  contactArr.push(contactObj);
+  const currentContact = contactArr[contactArr.length - 1];
+  table.insertAdjacentHTML(
+    "beforeEnd",
+    `<tr class="table-row" >
+           <td>
+           <input type="checkbox" class="myCheckbox">
+           <td>${currentContact.firstname} ${currentContact.lastName}</td>
+           <td>${currentContact.emailaddress}</td>
+           <td>${currentContact.phoneNo}</td>
+           <td>
+             <img src="/images/delete-icon.png"  class="img-del" alt="" />
+           </td>
+         </tr>`
+  );
+
+  localStorage.setItem("contactArr", JSON.stringify(contactArr));
+  modal.style.visibility = "hidden";
 });
 
 /* const deleteRow = document.querySelector(".img-del");*/
@@ -221,7 +199,7 @@ function fillModalWithRowData(clickedRow) {
   const phoneNumber = clickedRow
     .querySelector("td:nth-child(4)")
     .textContent.trim();
-  // console.log("phone", phoneNumber, document.getElementById("no."));
+
   // Set the values of modal2 inputs with the extracted data
   document.getElementById("fullname").value = fullName;
   document.getElementById("email").value = email;
@@ -256,13 +234,12 @@ cancelContact.addEventListener("click", function () {
 });
 
 editContact.addEventListener("click", function (event) {
-  modal2.style.display = "block";
-  formModal.style.display = "block";
-  modal.style.display = "block";
+  modal.style.visibility = "visible";
+  modal2.style.visibility = "hidden";
+  console.log(contactArr[0]);
   //getting my clicked row value
   emailaddress.value = document.getElementById("email").value;
   phoneNo.value = document.getElementById("no.").value;
-  console.log(document.getElementById("no.").value);
   //getting my clicked row value of fullName
   const fullName = document.getElementById("fullname").value;
   const fullNameParts = fullName.split(" ");
@@ -271,11 +248,21 @@ editContact.addEventListener("click", function (event) {
 
   //geting clicked row
 });
-// addElement.addEventListener("click", function () {
-//   currentRow.remove();
-// });
+addElement.addEventListener("click", function () {
+  currentRow.remove();
+});
 
 const contactName = () => {
   const searchbox = document.querySelector("#search").value.toUpperCase();
   console.log(input);
 };
+
+/* INTEL */
+
+const countrycode = window.intlTelInput(phoneNo, {
+  utilsScript:
+    "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/utils.js",
+  //this will add the countrycode to number input
+  separateDialCode: true,
+});
+console.log(phoneNo);

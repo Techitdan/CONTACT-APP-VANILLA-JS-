@@ -159,13 +159,30 @@ td {
   height: 30px;
 }
 
-.container2 {
-  width: 100%;
-  height: fit-content;
-  margin: auto;
-  /* border: ridge #ffffff 3px; */
-  /* padding: 15px; */
+/* .container2 {
+} */
+
+.form-modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: absolute;
+  /*  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center; */
+}
+.form-two {
+  width: 50vw;
   background-color: #ffffff;
+  margin: 320px auto;
+  position: relative;
+}
+
+.form-two input {
+  font-size: 24px;
 }
 
 .form-two h2 {
@@ -251,7 +268,7 @@ td {
   font-size: 24px;
 }
 .cancel-icon {
-  position: relative;
+  position: absolute;
   right: 0;
   top: 0;
 }
@@ -264,6 +281,7 @@ td {
 }
 .modal2 {
   width: 40%;
+  height: 30%;
   background-color: #eeecec;
   margin: 40px;
   padding: 10px;
