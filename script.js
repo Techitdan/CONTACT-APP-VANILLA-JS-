@@ -23,15 +23,24 @@ const editContact = document.querySelector(".edit-contact");
 const cancelContact = document.querySelector(".cancel-contact");
 const form = document.querySelector("form");
 let currentRow;
-const contactArr = JSON.parse(localStorage.getItem("contactArr")) || [];
+let contactArr = JSON.parse(localStorage.getItem("contactArr")) || [];
 
 const init = function () {
   emailaddress.value = " ";
-  phoneNo.value = countrycode.getNumber();
+  phoneNo.value = " ";
   firstname.value = " ";
   lastName.value = " ";
 };
 
+const removeDataFromLocalStorage = (currentRow) => {
+  let data = currentRow.children[2].textContent;
+  const index = contactArr.findIndex((e) => {
+    return e.emailaddress === data;
+  });
+  contactArr.splice(index, 1);
+  localStorage.setItem("contactArr", JSON.stringify(contactArr));
+  console.log("index", index);
+};
 // intel
 const countrycode = window.intlTelInput(phoneNo, {
   separateDialCode: true,
@@ -83,19 +92,19 @@ window.addEventListener("load", function () {
 });
 
 addContact.addEventListener("click", function () {
-  modal.style.visibility = "visible";
+  // modal.style.visibility = "visible";
   modal2.style.visibility = "hidden";
   formModal.style.display = "block";
   init();
 });
 
 cancelIcon.addEventListener("click", function () {
-  modal.style.visibility = "hidden";
+  // modal.style.visibility = "hidden";
   formModal.style.display = "none";
 });
 
 cancelElement.addEventListener("click", function () {
-  modal.style.visibility = "hidden";
+  // modal.style.visibility = "hidden";
   formModal.style.display = "none";
 });
 
@@ -138,8 +147,14 @@ form.addEventListener("submit", function (e) {
     );
 
     localStorage.setItem("contactArr", JSON.stringify(contactArr));
-    modal.style.visibility = "hidden";
+
+    // modal.style.visibility = "hidden";
     formModal.style.display = "none";
+    if (currentRow) {
+      removeDataFromLocalStorage(currentRow);
+      currentRow.remove();
+      // console.log("yea", currentRow);
+    }
   } else {
     console.log("year 2024....");
     return;
@@ -155,13 +170,16 @@ function deleteRow(event) {
 
     const row = event.target.closest("tr");
     const checkbox = row.querySelector(".myCheckbox");
-    console.log(checkbox);
 
     // Check if a row was found
     if (row) {
       if (checkbox && checkbox.checked) {
+        // console.log("row", row);
+        modal2.style.visibility = "hidden";
+
         // Remove the row from the DOM
         row.remove();
+        removeDataFromLocalStorage(row);
       }
     }
   }
@@ -205,6 +223,10 @@ deleteContact.addEventListener("click", function () {
       if (row) {
         row.remove();
       }
+      // contactArr.splice(0, contactArr.length);
+      contactArr = [];
+      localStorage.setItem("contactArr", JSON.stringify(contactArr));
+
       deleteContact.style.visibility = "hidden";
       checkAll.checked = false;
     }
@@ -212,7 +234,7 @@ deleteContact.addEventListener("click", function () {
 });
 
 // Define the populateModalWithRowData function outside of the event listener block
-function fillModalWithRowData(clickedRow) {
+const fillModalWithRowData = (clickedRow) => {
   // Get the full name, email, and phone number from the clicked row
   const fullName = clickedRow
     .querySelector("td:nth-child(2)")
@@ -226,7 +248,7 @@ function fillModalWithRowData(clickedRow) {
   document.getElementById("fullname").value = fullName;
   document.getElementById("email").value = email;
   document.getElementById("no.").value = phoneNumber;
-}
+};
 
 // Add event listener to handle clicks on the table rows
 document.addEventListener("click", function (event) {
@@ -253,12 +275,15 @@ document.addEventListener("click", function (event) {
 //Event listener to remove and edit second modal
 cancelContact.addEventListener("click", function () {
   modal2.style.visibility = "hidden";
+  formModal.style.display = "none";
+
+  // modal.style.visibility = "visible";
 });
 
 editContact.addEventListener("click", function (event) {
-  modal2.style.display = "block";
+  modal2.style.visibility = "hidden";
+  //  modal2.style.display = "none";
   formModal.style.display = "block";
-  modal.style.display = "block";
   //getting my clicked row value
   emailaddress.value = document.getElementById("email").value;
   phoneNo.value = document.getElementById("no.").value;
@@ -268,11 +293,9 @@ editContact.addEventListener("click", function (event) {
   const fullNameParts = fullName.split(" ");
   firstname.value = fullNameParts[0];
   lastName.value = fullNameParts.slice(1).join(" ");
-
-  //geting clicked row
+  console.log("currentRow", currentRow.children[2].textContent);
+  // currentRow.remove();
 });
-// addElement.addEventListener("click", function () {
-//   currentRow.remove();
 // });
 
 const contactName = () => {
